@@ -13,6 +13,18 @@ app.post("/api", async (req, res) => {
   res.send(`you got me, ${requesterName}`);
 });
 
+app.patch("/api", async (_req, res) => {
+  res.send("/api patch");
+});
+
+app.put("/api", async (_req, res) => {
+  res.send("/api put");
+});
+
+app.delete("/api", async (_req, res) => {
+  res.send("/api delete");
+});
+
 app.use(async (_req, res) => {
   res.status(404).json({ message: "page not found" });
 });
