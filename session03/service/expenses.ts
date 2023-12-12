@@ -10,6 +10,11 @@ export function createExpenseData(data: InputExpense): Expense {
   return result;
 }
 
+export function getOneExpense(id: number): Expense | undefined {
+  const result = expenseRepository.getOne(id);
+  return result;
+}
+
 export function getListExpenses(): Expense[] {
   const result = expenseRepository.getAll();
   return result;

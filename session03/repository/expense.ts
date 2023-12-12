@@ -35,6 +35,16 @@ export default class ExpenseRepository {
     return this._readJson();
   }
 
+  getOne(id: number): Expense | undefined {
+    const expenses = this._readJson();
+    const expense = expenses.filter((d) => d.id === id)[0];
+    if (!expense) {
+      return undefined;
+    }
+
+    return expense;
+  }
+
   _writeJson(rawData: Expense[]) {
     writeFileSync(this._jsonPath, JSON.stringify(rawData, null, 2));
   }
