@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "createdAt": "2023-12-12T14:10:17.473Z",
+    "name": "Beli Bawang",
+    "nominal": 10000,
+    "category": "dapur"
+  },
+  {
+    "id": 2,
+    "createdAt": "2023-12-12T14:10:29.299Z",
+    "name": "Beli Sayur",
+    "nominal": 3000,
+    "category": "dapur"
+  },
+  {
+    "id": 3,
+    "createdAt": "2023-12-12T14:11:05.210Z",
+    "name": "Beli Sabun",
+    "nominal": 5000,
+    "category": "toilet"
+  }
+]
