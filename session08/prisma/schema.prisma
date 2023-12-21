@@ -16,4 +16,30 @@ model Branch {
   location  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // relationship
+  manager Manager?
+  classes Class[]
+}
+
+model Manager {
+  id       Int    @id @default(autoincrement())
+  fullName String @db.VarChar(50)
+  branchId Int    @unique
+
+  // relationship
+  branch Branch @relation(fields: [branchId], references: [id])
+}
+
+model Class {
+  id        Int       @id @default(autoincrement())
+  branchId  Int
+  name      String
+  startAt   DateTime?
+  endAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // relationship
+  Branch Branch @relation(fields: [branchId], references: [id])
 }

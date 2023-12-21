@@ -4,13 +4,14 @@ import {
   deleteBranch,
   findAllBranch,
   findOneBranch,
+  statsBranch,
   updateBranch,
 } from "../service/branch";
 
 export async function handleCreateBranch(req: Request, res: Response) {
-  const { name, location } = req.body;
+  const { name, location, manager } = req.body;
   try {
-    const result = await createBranch({ name, location });
+    const result = await createBranch({ name, location }, manager);
     res.status(201).json({
       result,
     });
@@ -135,6 +136,31 @@ export async function handleDeleteBranch(req: Request, res: Response) {
     console.error(error);
     res.status(500).send({
       message: " failed to delete data",
+      error,
+    });
+  }
+}
+
+export async function handleGetBranchesStats(_req: Request, res: Response) {
+  try {
+    const { allDataStats, statsByName } = await statsBranch();
+    res.status(200).json({
+      result: {
+        count: allDataStats._count._all,
+        createdAtMin: allDataStats._min.createdAt,
+        createdAtMax: allDataStats._max.createdAt,
+        byName: {
+          duplicateName: statsByName.map((d) => ({
+            name: d.name,
+            total: d._count._all,
+          })),
+        },
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "failed to get branch data status",
       error,
     });
   }
